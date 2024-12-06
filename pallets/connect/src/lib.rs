@@ -111,7 +111,7 @@ pub mod pallet {
 	/// Total amount of registered users.
 	#[pallet::storage]
 	#[pallet::getter(fn total_registered)]
-	pub type TotalRegistered<T: Config> = StorageValue<_, u32>;
+	pub type TotalRegistered<T: Config> = StorageValue<_, u32, ValueQuery>;
 
 	/// A mapping that declares names that are in use by the pallet.
 	#[pallet::storage]
@@ -221,7 +221,7 @@ pub mod pallet {
 			// Note the use of 'unwrap_or_default' - this is better than just a plain 'unwrap()'
 			// The default for 'u32' is 0, meaning an 'unwrap_or(0)' could also work here!
 
-			let total_registered = <TotalRegistered<T>>::get().unwrap_or_default();
+			let total_registered = <TotalRegistered<T>>::get();
 
 			// The use of checked_add() ensures 'safe math' is taking place.
 			// Since we never want panic within a runtime, we have to ensure all *possible* errors

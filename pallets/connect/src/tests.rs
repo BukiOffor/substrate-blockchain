@@ -21,7 +21,7 @@ fn register_a_user() {
 		assert_ok!(Balances::force_set_balance(RuntimeOrigin::root(), 1, 10));
 		// Dispatch a signed extrinsic.
 		assert_ok!(Connect::register(RuntimeOrigin::signed(1), name.clone(), bio));
-		assert_eq!(Connect::total_registered().unwrap(), 1);
+		assert_eq!(Connect::total_registered(), 1);
 
 		// Check that the registered user exists
 		let bounded_name: BoundedVec<u8, MaxNameLength> = name.try_into().unwrap();

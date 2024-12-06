@@ -364,6 +364,13 @@ mod benches {
 }
 
 impl_runtime_apis! {
+
+	impl connect_runtime_api::ConnectApi<Block> for Runtime {
+		fn total_registered() -> u32 {
+			Connect::total_registered()
+		}
+	}
+
 	impl sp_api::Core<Block> for Runtime {
 		fn version() -> RuntimeVersion {
 			VERSION
@@ -377,6 +384,8 @@ impl_runtime_apis! {
 			Executive::initialize_block(header)
 		}
 	}
+
+
 
 	impl sp_api::Metadata<Block> for Runtime {
 		fn metadata() -> OpaqueMetadata {

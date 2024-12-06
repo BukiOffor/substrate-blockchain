@@ -1,4 +1,4 @@
-# Substrate MOOC Node Template
+# Substrate Blockchain
 
 This template is based on the [Substrate Node Template](https://github.com/substrate-developer-hub/substrate-node-template). It contains a pallet and working configuration for a runtime that pertains to the course located at  [education.web3.foundation](http://education.web3.foundation/docs/introsubstrate), brought to you by the Technical Education team at Web3 Foundation.
 
