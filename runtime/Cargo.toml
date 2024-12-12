@@ -52,6 +52,8 @@ frame-system-benchmarking = { version = "4.0.0-dev", default-features = false, g
 pallet-connect = { version = "4.0.0-dev", default-features = false, path = "../pallets/connect" }
 multi-account = {default-features = false, path = "../pallets/multi-account" }
 connect-runtime-api = { version = "1.0.0", path = "../pallets/connect/rpc/runtime-api", default-features = false }
+multi-runtime-api = { version = "1.0.0", path = "../pallets/multi-account/rpc/runtime-api", default-features = false }
+
 
 [build-dependencies]
 substrate-wasm-builder = { version = "5.0.0-dev", git = "https://github.com/paritytech/substrate.git", optional = true , branch = "polkadot-v0.9.42" }

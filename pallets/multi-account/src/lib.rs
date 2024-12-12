@@ -35,10 +35,14 @@ pub mod pallet {
 	// store the account on our storage map with the account Id of of all its signatories and a
 	// required signature threshold. allow the account to hold balances.
 	// dispatch any call if the signature threshold is met.
+	// cancel or unvote a previously approve call ❌
+		// check if the length of voters is 1 in a cancel call and remove the call entirely from the chain ❌
 
 	// create rpc call to check number of signed sig for a call hash ❌ 
 	// create rpc for getting signatories for an account ❌
 	// create rpc for getting the number of threshold required for a multi account ❌
+
+
 
 	type CallHash = [u8; 32];
 
@@ -75,6 +79,8 @@ pub mod pallet {
 	/// because this will require making multiple calls to fetch information that can be
 	/// fetched with a single call. The `Account` storage should be set to a `NStorageMap`
 	/// that will be able to store all these information.
+	/// 
+	/// Also this does not really make sense in being a value query
 	#[pallet::storage]
 	#[pallet::getter(fn get_threshold)]
 	pub type Threshold<T: Config> = StorageMap<_, Blake2_128Concat, T::AccountId, u16, ValueQuery>;
@@ -84,6 +90,7 @@ pub mod pallet {
 	/// accounts that have voted yes on a transaction with the bounded vec we can be sure that
 	/// there is no double voting.
 	#[pallet::storage]
+	#[pallet::getter(fn get_call)]
 	pub type Calls<T: Config> = StorageDoubleMap<
 		_,
 		Twox64Concat,

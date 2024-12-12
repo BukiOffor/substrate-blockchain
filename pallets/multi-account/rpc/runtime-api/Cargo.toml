@@ -1,5 +1,5 @@
 [package]
-name = "connect-runtime-api"
+name = "multi-runtime-api"
 authors = ["Buki Offor <https://github.com/BukiOffor>"]
 version = "1.0.0"
 edition = "2021"
@@ -8,6 +8,9 @@ edition = "2021"
 targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
+codec = { package = "parity-scale-codec", version = "3.6.1", default-features = false, features = [
+	"derive",
+] }
 sp-api = { git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.42", default-features = false }
 
 [features]

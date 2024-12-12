@@ -4973,6 +4973,31 @@ dependencies = [
 ]
 
 [[package]]
+name = "multi-account-rpc"
+version = "1.0.0"
+dependencies = [
+ "assert_matches",
+ "jsonrpsee",
+ "lazy_static",
+ "multi-runtime-api",
+ "parity-scale-codec",
+ "serde",
+ "serde_json",
+ "sp-api",
+ "sp-blockchain",
+ "sp-runtime",
+ "tokio",
+]
+
+[[package]]
+name = "multi-runtime-api"
+version = "1.0.0"
+dependencies = [
+ "parity-scale-codec",
+ "sp-api",
+]
+
+[[package]]
 name = "multiaddr"
 version = "0.16.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -5207,6 +5232,7 @@ dependencies = [
  "frame-system",
  "futures",
  "jsonrpsee",
+ "multi-account-rpc",
  "node-template-runtime",
  "pallet-transaction-payment",
  "pallet-transaction-payment-rpc",
@@ -5254,6 +5280,7 @@ dependencies = [
  "frame-system-rpc-runtime-api",
  "frame-try-runtime",
  "multi-account",
+ "multi-runtime-api",
  "pallet-aura",
  "pallet-balances",
  "pallet-connect",

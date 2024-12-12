@@ -38,11 +38,13 @@ where
 	C::Api: BlockBuilder<Block>,
 	// add the runtime API hook to C	
 	C::Api: connect_rpc::ConnectApi<Block>,
+	C::Api: multi_account_rpc::AccountApi<Block, AccountId>,
 	P: TransactionPool + 'static,
 {
 	use pallet_transaction_payment_rpc::{TransactionPayment, TransactionPaymentApiServer};
 	use substrate_frame_rpc_system::{System, SystemApiServer};
 	use connect_rpc::{ConnectPallet, ConnectApiServer};
+	use multi_account_rpc::{MultiAccountPallet, MultiAccountApiServer};
 
 
 	let mut module = RpcModule::new(());
@@ -51,6 +53,7 @@ where
 	module.merge(System::new(client.clone(), pool.clone(), deny_unsafe).into_rpc())?;
 	module.merge(TransactionPayment::new(client.clone()).into_rpc())?;
 	module.merge(ConnectPallet::new(client.clone()).into_rpc())?;
+	module.merge(MultiAccountPallet::new(client.clone()).into_rpc())?;
 
 	Ok(module)
 }

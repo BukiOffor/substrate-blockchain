@@ -362,8 +362,52 @@ mod benches {
 		[pallet_connect, Connect]
 	);
 }
+type CallHash = [u8; 32];
 
 impl_runtime_apis! {
+
+	// this rpc can obviously be written better
+	// should it return an error if a call does not exist or None 
+	impl multi_runtime_api::MultiAccountApi<Block, AccountId> for Runtime {
+		/// get the number of accounts that have approved a particular call hash
+        fn get_approvals_for_call(id: AccountId, call_hash: CallHash ) -> Option<u32>{
+			let signatures = MultiAccount::get_call(id, call_hash);
+			let signers = signatures.into_inner();
+			if signers.len() > 0 {
+				Some(signers.len() as u32)
+			}else {
+				// this means the call does not exist on chain
+				None
+			}
+
+		}
+        /// get the signatories for an account. Would return an empty vec if account is not a multiAccunt
+        fn get_signatories_for_account(id: AccountId) -> Option<Vec<AccountId>>{
+			let signers = MultiAccount::get_account(id).into_inner();
+			Some(signers)
+		}
+        
+		/// get the threshold required for a call to pass
+        fn get_threshold_for_account(id: AccountId) -> Option<u32>{
+			let threshold = MultiAccount::get_threshold(id);
+			if threshold > 0 {
+				Some(threshold as u32)
+			} else {
+				None
+			}
+		}
+        /// get the accounts that has approved a particular call
+        fn get_approval_accounts_for_call(id: AccountId, call_hash: CallHash) -> Option<Vec<AccountId>>{
+			let signatures = MultiAccount::get_call(id, call_hash);
+			let signers = signatures.into_inner();
+			if signers.len() > 0 {
+				Some(signers)
+			}else {
+				// this means the call does not exist on chain
+				None
+			}
+		}
+	}
 
 	impl connect_runtime_api::ConnectApi<Block> for Runtime {
 		fn total_registered() -> u32 {
